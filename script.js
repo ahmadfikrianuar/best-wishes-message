@@ -1,4 +1,4 @@
-const unlockDate = new Date("2025-02-20T00:01:00");
+const unlockDate = new Date("2026-02-10T00:01:00");
 const locked = document.getElementById("locked");
 const app = document.getElementById("app");
 
@@ -110,3 +110,4 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
+
