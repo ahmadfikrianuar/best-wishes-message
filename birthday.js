@@ -1,3 +1,5 @@
+// Unlock time: 7 Feb 2026, 12:01 AM
+const unlockDate = new Date("2026-02-07T00:01:00");
 const locked = document.getElementById("locked");
 const app = document.getElementById("app");
 
@@ -182,6 +184,7 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
+
 
 
 
