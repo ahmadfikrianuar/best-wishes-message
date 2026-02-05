@@ -1,3 +1,15 @@
+const locked = document.getElementById("locked");
+const app = document.getElementById("app");
+
+if (new Date() >= unlockDate) {
+  locked.style.display = "none";
+  app.classList.remove("hidden");
+} else {
+  locked.style.display = "flex";
+  app.classList.add("hidden");
+}
+
+
 const messages = [
   "Happy Birthday to You 🎉",
   "Wishing You Joy & Happiness 💖",
@@ -170,5 +182,6 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
+
 
 
