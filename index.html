@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<head>
   <meta charset="UTF-8">
-  <title>Best Wishes</title>
-  <link rel="stylesheet" href="style.css">
+
+  <title>Happy Birthday 🎉</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Handlee&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="birthday.css">
 </head>
 <body>
-
 <div id="locked">
   <p>This message will be available on<br><strong>10 February, 12:01 AM</strong></p>
 </div>
 
-<div id="app" class="hidden">
-  <canvas id="fireworks"></canvas>
+<canvas id="sparkles"></canvas>
+<audio id="bgMusic" loop>
+  <source src="assets/birthday-music.mp3" type="audio/mpeg">
+</audio>
+<!--button id="musicToggle">🔊</button-->
+<p id="tapHint">Tap anywhere 🎵</p>
 
-  <div class="content">
-    <h1>Wishing you all the best<br>in your future and new work</h1>
-    <img src="assets/bouquet.png" class="bouquet">
-  </div>
+
+<div class="birthday-container">
+  <h1 id="birthdayText"></h1>
+
+  <p class="subtext hidden">
+    🎂 ٱلْحَمْدُ لِلَّٰهِ for another year!
+  </p>
+<p class="subtext hidden">
+    May Allah bless you filled with peace, happiness, and spiritual growth 💖
+  </p>
+
+  <button class="next-btn hidden" onclick="goNext()">
+    🎁 Open Your Surprise
+  </button>
 </div>
 
-<script src="script.js"></script>
+<script src="birthday.js"></script>
 </body>
-
 </html>
