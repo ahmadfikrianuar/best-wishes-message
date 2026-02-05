@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: url("assets/bg.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Handlee', cursive;
+
+}
+
+.birthday-container {
+  background: rgba(255,255,255,0.75);
+  padding: 50px 60px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 48px;
+  color: #FF69B4;
+  min-height: 80px;
+}
+
+.subtext {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #444;
+  animation: fadeIn 2s ease forwards;
+}
+
+.next-btn {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #FF9A9E, #FECFEF);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 2s ease forwards;
+}
+h1::after {
+  content: "|";
+  margin-left: 5px;
+  animation: blink 1s infinite;
+  color: #FF69B4;
+}
+
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    pointer-events: auto;
+  }
+.particles::before,
+.particles::after {
+  content: "💖 💕 ✨ 💐 💫";
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  font-size: 24px;
+  animation: floatUp 12s linear infinite;
+  opacity: 0.4;
+}
+
+.particles::after {
+  animation-delay: 6s;
+  opacity: 0.2;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-120vh);
+  }
+}
+
+}
+#sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}#musicToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.6);
+  border: none;
+  border-radius: 50%;
+  font-size: 22px;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 10;
+}
+#tapHint {
+  position: fixed;
+  font-size: 14px;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: hintFade 2.5s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes hintFade {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
