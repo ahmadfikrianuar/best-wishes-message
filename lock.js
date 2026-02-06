@@ -1,4 +1,4 @@
-const unlockDate = new Date("2026-02-07T00:01:00");
+const unlockDate = new Date("2025-02-07T00:01:00");
 const birthdayPage = "birthday.html";
 
 function checkUnlock() {
@@ -12,3 +12,4 @@ checkUnlock();
 
 // Check every second (auto redirect)
 setInterval(checkUnlock, 1000);
+
