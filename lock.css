@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffd1dc, #ffe4e1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+#locked {
+  position: absolute;
+  inset: 0;
+  background: #f6f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
