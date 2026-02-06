@@ -1,16 +1,3 @@
-// Unlock time: 7 Feb 2026, 12:01 AM
-const unlockDate = new Date("2026-02-07T00:01:00");
-const locked = document.getElementById("locked");
-const app = document.getElementById("app");
-
-if (new Date() >= unlockDate) {
-  locked.style.display = "none";
-  app.classList.remove("hidden");
-} else {
-  locked.style.display = "flex";
-  app.classList.add("hidden");
-}
-
 
 const messages = [
   "Happy Birthday to You 🎉",
@@ -184,9 +171,5 @@ window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
-
-
-
-
 
 
