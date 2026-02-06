@@ -1,113 +1,112 @@
-const unlockDate = new Date("2026-02-10T00:01:00");
-const locked = document.getElementById("locked");
-const app = document.getElementById("app");
-
-if (new Date() >= unlockDate) {
-  locked.style.display = "none";
-  app.classList.remove("hidden");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
+body {
+  font-family: "Segoe UI", sans-serif;
+  height: 100vh;
+  background: url("assets/bg.jpg") center/cover no-repeat;
+  overflow: hidden;
+}
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-const colors = ["#FFD700","#FF6EC7","#C57BFF","#FFB347","#FF4500","#FF69B4"];
-let fireworks = [];
+.hidden {
+  display: none;
+}
 
-// Particle class
-class Particle {
-  constructor(x, y, color, speed, angle, life, size) {
-    this.x = x;
-    this.y = y;
-    this.prevX = x;
-    this.prevY = y;
-    this.color = color;
-    this.speed = speed;
-    this.angle = angle;
-    this.life = life;
-    this.size = size;
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  background: transparent;  /* keeps bg.jpg always visible */
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ text-align: center;
+	color: #BA55D3;
+	text-shadow: 0 4px 10px rgba(0,0,0,0.5)
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 52px;
+  text-align: center;
+  margin-bottom: 12px;
+
+  background: linear-gradient(90deg, #2ECC71, #1ABC9C, #16A085);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+   animation: textSway 4s ease-in-out infinite alternate;
+}
+
+.bouquet {
+  transform: rotate(-20deg);
+
+  width: 340px;             /* enlarged bouquet */
+  margin-top: -5px;         /* pulls it closer to text */
+  filter: drop-shadow(0 25px 30px rgba(0,0,0,0.45));
+   animation: bouquetSwing 7s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes textSway {
+  0% {
+    transform: rotate(-2deg);
   }
-  update() {
-    this.prevX = this.x;
-    this.prevY = this.y;
-    this.x += Math.cos(this.angle) * this.speed;
-    this.y += Math.sin(this.angle) * this.speed;
-    this.life--;
+  100% {
+    transform: rotate(2deg);
   }
-  draw() {
-    const alpha = Math.max(this.life / 60, 0); // fade effect
-    ctx.beginPath();
-    ctx.moveTo(this.prevX, this.prevY);
-    ctx.lineTo(this.x, this.y);
-    ctx.strokeStyle = this.color + Math.floor(alpha*255).toString(16);
-    ctx.lineWidth = this.size;
-    ctx.shadowBlur = this.size*2;
-    ctx.shadowColor = this.color;
-    ctx.stroke();
+}
+@keyframes bouquetSwing {
+  0% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(-6deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg);
   }
 }
 
-// Create a firework explosion
-function createFirework() {
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height * 0.5;
+.back-btn {
+  margin-top: 25px;
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
 
-  const layers = 3; // far, mid, near
-  for (let layer = 0; layer < layers; layer++) {
-    const count = 50 + layer*20;
-    const speedBase = 2 + layer*1.5;
-    const sizeBase = 1 + layer*0.5;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(90deg, #B983FF, #91A7FF);
+  color: white;
 
-    for (let i = 0; i < count; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * speedBase + speedBase/2;
-      const size = Math.random() * sizeBase + sizeBase/2;
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      fireworks.push(new Particle(x, y, color, speed, angle, 60, size));
-    }
-  }
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-// Animate fireworks
-function animate() {
-ctx.globalCompositeOperation = "destination-out";
-  ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // adjust alpha for trail length
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Switch back to normal drawing mode for particles
-  ctx.globalCompositeOperation = "source-over";
-
-  fireworks.forEach((p, i) => {
-    if (p.life <= 0) {
-      fireworks.splice(i, 1);
-      return;
-    }
-
-    p.update();
-
-    const alpha = Math.max(p.life / 60, 0); // optional: adds extra fade
-    ctx.beginPath();
-    ctx.moveTo(p.prevX, p.prevY);
-    ctx.lineTo(p.x, p.y);
-    ctx.strokeStyle = p.color + Math.floor(alpha * 255).toString(16);
-    ctx.lineWidth = p.size;
-    ctx.shadowBlur = p.size * 2;
-    ctx.shadowColor = p.color;
-    ctx.stroke();
-  });
-
-  requestAnimationFrame(animate);
+.back-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 18px 30px rgba(0,0,0,0.45);
 }
-
-// Launch fireworks every 900ms
-setInterval(createFirework, 900);
-animate();
-
-// Resize handler
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
